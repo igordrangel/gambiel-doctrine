@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "ca3d94ce395ce22006e30dba1d042367",
+  "content-hash": "2b02a40c9f182d3ad064d3436c09e972",
   "packages": [
     {
       "name": "composer/package-versions-deprecated",
@@ -970,6 +970,46 @@
       "time": "2020-03-27T11:06:43+00:00"
     },
     {
+      "name": "igordrangel/gambiel-helpers",
+      "version": "1.0.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/igordrangel/gambiel-helpers.git",
+        "reference": "a82277fe2624b6ace9c29dbf378a1bb1563c20d8"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/igordrangel/gambiel-helpers/zipball/a82277fe2624b6ace9c29dbf378a1bb1563c20d8",
+        "reference": "a82277fe2624b6ace9c29dbf378a1bb1563c20d8",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=7.4"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "GambiEl\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "proprietary"
+      ],
+      "authors": [
+        {
+          "name": "Igor D. Rangel",
+          "email": "igordrangel@gmail.com"
+        }
+      ],
+      "homepage": "https://github.com/igordrangel/gambiel-helpers",
+      "keywords": [
+        "gambiel",
+        "helpers"
+      ],
+      "time": "2020-10-20T01:27:35+00:00"
+    },
+    {
       "name": "psr/container",
       "version": "1.0.0",
       "source": {
@@ -1617,7 +1657,7 @@
   ],
   "packages-dev": [],
   "aliases": [],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "stability-flags": [],
   "prefer-stable": false,
   "prefer-lowest": false,

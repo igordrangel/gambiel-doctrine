@@ -6,6 +6,7 @@
 	use Doctrine\ORM\QueryBuilder;
 	use GambiEl\Doctrine\Join\JoinConfig;
 	use GambiEl\Filter\Enums\DoctrineFilterComparatorEnum;
+	use GambiEl\Helpers\GambielArrayHelper;
 	
 	abstract class DoctrineFilterBase {
 		private static array $filter = [
@@ -16,7 +17,7 @@
 		
 		public static function create(QueryBuilder $qb, array $filter, array $joins): QueryBuilder {
 			self::clearFilters();
-			$filter = ManipuladorDeArraysHelper::ClearArray($filter);
+			$filter = GambielArrayHelper::clear($filter);
 			
 			if (!empty($filter)) {
 				foreach ($filter as $colunaBd => $filter) {
