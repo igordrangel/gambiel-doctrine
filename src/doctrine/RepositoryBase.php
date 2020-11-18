@@ -12,15 +12,18 @@
 	use Doctrine\ORM\TransactionRequiredException;
 	use GambiEl\Doctrine\Filter\DoctrineFilterBase;
 	use GambiEl\Doctrine\Join\JoinConfig;
+	use GambiEl\Helpers\GambielArrayHelper;
 	use InvalidArgumentException;
 	
 	abstract class RepositoryBase {
 		protected QueryBuilder $qb;
 		protected string $class;
+		protected string $dbConfigName;
 		
 		private string $selectAlias = "e";
 		
-		public function __construct($class, bool $withDistinct = false) {
+		public function __construct(string $dbConfigName, $class, bool $withDistinct = false) {
+			$this->dbConfigName = $dbConfigName;
 			$this->class = $class;
 			$this->qb = $this->EntityManager()->createQueryBuilder();
 			$this->qb->from($this->class, 'e');
@@ -31,11 +34,28 @@
 		
 		protected function EntityManager(): EntityManager {
 			$conn = new ConnectionConfig();
-			return $conn->getEntityManager(
-				$_ENV['GAMBIEL_DATABASE_NAME'],
-				$_ENV['GAMBIEL_DATABASE_USER'],
-				$_ENV['GAMBIEL_DATABASE_PASS']
-			);
+			
+			$dbConfig = $_ENV['GAMBIEL_DB_CONFIG'];
+			if (is_array($dbConfig)) {
+				$indexConfig = GambielArrayHelper::multidimensionalSearch($dbConfig, [
+					"name" => $this->dbConfigName
+				]);
+				
+				if ($indexConfig !== false) {
+					$config = $dbConfig[$indexConfig];
+					return $conn->getEntityManager(
+						$config['host'],
+						$config['dbName'],
+						$config['user'],
+						$config['password'],
+						$config['driver']
+					);
+				} else {
+					throw new InvalidArgumentException("Database config is not found!");
+				}
+			} else {
+				throw new InvalidArgumentException("Database config is not found!");
+			}
 		}
 		
 		protected function configQueryBuilder() { }

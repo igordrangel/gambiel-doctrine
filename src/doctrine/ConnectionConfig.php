@@ -23,9 +23,11 @@
 		}
 		
 		public function getEntityManager(
+			string $host,
 			string $dbname,
 			string $user,
-			string $password
+			string $password,
+			string $driver
 		): EntityManager {
 			try {
 				if (empty($this->entityManager)) {
@@ -37,8 +39,8 @@
 						'dbname' => $dbname,
 						'user' => $user,
 						'password' => $password,
-						'host' => 'localhost',
-						'driver' => 'pdo_mysql',
+						'host' => $host,
+						'driver' => $driver,
 						'charset' => 'utf8'
 					], $config);
 					
