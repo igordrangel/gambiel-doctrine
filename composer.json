@@ -15,7 +15,6 @@
             "email": "igordrangel@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4",
         "doctrine/orm": "*",
