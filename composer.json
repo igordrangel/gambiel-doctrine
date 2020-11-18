@@ -1,5 +1,5 @@
 {
-    "version": "1.0.10",
+    "version": "1.0.11",
     "name": "igordrangel/gambiel-doctrine",
     "description": "Usage for make easy use doctrine",
     "type": "library",
@@ -15,9 +15,9 @@
             "email": "igordrangel@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4",
+        "doctrine/orm": "*",
         "igordrangel/gambiel-helpers": "^1.0"
     },
     "autoload": {
