@@ -1,10 +1,10 @@
 <?php
 	
-	namespace GambiEl\Doctrine\Filter;
+	namespace GambiEl\Doctrin2\Filter;
 	
 	use Doctrine\DBAL\Connection;
 	use Doctrine\ORM\QueryBuilder;
-	use GambiEl\Doctrine\Join\JoinConfig;
+	use GambiEl\Doctrin2\Join\JoinConfig;
 	use GambiEl\Filter\Enums\DoctrineFilterComparatorEnum;
 	use GambiEl\Helpers\GambielArrayHelper;
 	

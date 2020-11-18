@@ -1,6 +1,6 @@
 <?php
 	
-	namespace GambiEl\Doctrine\Filter;
+	namespace GambiEl\Doctrin2\Filter;
 	
 	use GambiEl\Filter\Enums\DoctrineFilterComparatorEnum;
 	

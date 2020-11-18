@@ -1,6 +1,6 @@
 <?php
 	
-	namespace GambiEl\Doctrine;
+	namespace GambiEl\Doctrin2;
 	
 	use Doctrine\ORM\EntityManager;
 	use Doctrine\ORM\ORMException;
