@@ -1,6 +1,6 @@
 <?php
 	
-	namespace GambiEl\Doctrine\Repository;
+	namespace GambiEl\Doctrine;
 	
 	use Doctrine\DBAL\ConnectionException;
 	use Doctrine\ORM\EntityManager;
