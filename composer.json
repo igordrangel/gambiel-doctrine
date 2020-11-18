@@ -1,6 +1,6 @@
 {
-    "version": "1.0.12",
     "name": "igordrangel/gambiel-doctrine",
+    "version": "1.0.13",
     "description": "Usage for make easy use doctrine",
     "type": "library",
     "license": "proprietary",
