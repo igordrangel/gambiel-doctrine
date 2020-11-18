@@ -27,7 +27,8 @@
 			string $dbname,
 			string $user,
 			string $password,
-			string $driver
+			string $driver,
+			string $port
 		): EntityManager {
 			try {
 				if (empty($this->entityManager)) {
@@ -41,6 +42,7 @@
 						'password' => $password,
 						'host' => $host,
 						'driver' => $driver,
+						'port' => $port,
 						'charset' => 'utf8'
 					], $config);
 					

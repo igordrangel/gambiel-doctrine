@@ -48,7 +48,8 @@
 						$config['dbName'],
 						$config['user'],
 						$config['password'],
-						$config['driver']
+						$config['driver'],
+						$config['port']
 					);
 				} else {
 					throw new InvalidArgumentException("Database config is not found!");
