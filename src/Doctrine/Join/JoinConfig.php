@@ -1,7 +1,7 @@
 <?php
 	declare(strict_types=1);
 	
-	namespace GambiEl\Doctrin2\Join;
+	namespace GambiEl\Doctrine\Join;
 	
 	class JoinConfig {
 		private string $join;

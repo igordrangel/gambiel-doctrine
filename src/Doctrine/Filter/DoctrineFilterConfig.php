@@ -1,8 +1,8 @@
 <?php
 	
-	namespace GambiEl\Doctrin2\Filter;
+	namespace GambiEl\Doctrine\Filter;
 	
-	use GambiEl\Filter\Enums\DoctrineFilterComparatorEnum;
+	use GambiEl\Doctrine\Filter\Enums\DoctrineFilterComparatorEnum;
 	
 	class DoctrineFilterConfig {
 		private ?string $group;

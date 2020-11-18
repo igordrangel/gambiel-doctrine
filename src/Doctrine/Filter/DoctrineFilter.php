@@ -1,6 +1,6 @@
 <?php
 	
-	namespace GambiEl\Doctrin2\Filter;
+	namespace GambiEl\Doctrine\Filter;
 	
 	class DoctrineFilter extends DoctrineFilterBase {
 		

@@ -1,6 +1,6 @@
 <?php
 	
-	namespace GambiEl\Doctrin2;
+	namespace GambiEl\Doctrine;
 	
 	use Doctrine\DBAL\ConnectionException;
 	use Doctrine\ORM\EntityManager;
@@ -10,8 +10,8 @@
 	use Doctrine\ORM\ORMException;
 	use Doctrine\ORM\QueryBuilder;
 	use Doctrine\ORM\TransactionRequiredException;
-	use GambiEl\Doctrin2\Filter\DoctrineFilterBase;
-	use GambiEl\Doctrin2\Join\JoinConfig;
+	use GambiEl\Doctrine\Filter\DoctrineFilterBase;
+	use GambiEl\Doctrine\Join\JoinConfig;
 	use GambiEl\Helpers\GambielArrayHelper;
 	use InvalidArgumentException;
 	

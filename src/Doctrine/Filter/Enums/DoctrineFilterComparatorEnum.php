@@ -1,6 +1,6 @@
 <?php
 	
-	namespace GambiEl\Doctrin2\Filter\Enums;
+	namespace GambiEl\Doctrine\Filter\Enums;
 	
 	class DoctrineFilterComparatorEnum {
 		const EQUAL = "=";
