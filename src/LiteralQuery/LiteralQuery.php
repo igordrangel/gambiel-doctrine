@@ -30,8 +30,8 @@
 					$this->dbname = $config['dbName'];
 					$this->user = $config['user'];
 					$this->password = $config['password'];
-					$this->drive = $config['driver'];
-					$this->port = $config['port'];
+					$this->drive = str_replace('pdo_', '', $config['driver']);
+					$this->port = $config['port'] ?? 3306;
 				} else {
 					throw new InvalidArgumentException("Database config is not found!");
 				}
@@ -40,7 +40,17 @@
 			}
 			
 			try {
-				$this->connection = new PDO("$this->drive:host=$this->host;dbname=$this->dbname;port=$this->port;charset=utf8", $this->user, $this->password);
+				switch ($this->drive) {
+					case 'mysql':
+						$pdoConfig = "$this->drive:host=$this->host:$this->port;dbname=$this->dbname;charset=utf8";
+						break;
+					case 'sqlsrv':
+						$pdoConfig = "$this->drive:Server=$this->host,$this->port;Database=$this->dbname";
+						break;
+					default:
+						throw new InvalidArgumentException("The drive $this->drive is not supported.");
+				}
+				$this->connection = new PDO($pdoConfig, $this->user, $this->password);
 			} catch (InvalidArgumentException $e) {
 				throw $e;
 			}
