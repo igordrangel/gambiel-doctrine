@@ -18,7 +18,8 @@
     "require": {
         "php": ">=7.4",
         "doctrine/orm": "*",
-        "igordrangel/gambiel-helpers": "^1.0"
+        "igordrangel/gambiel-helpers": "^1.0",
+        "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {
