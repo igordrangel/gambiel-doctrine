@@ -106,9 +106,10 @@
 		/**
 		 * @param array $filter
 		 * @param array $paginationOrderingSort Array with [page => 1, order => 'e.Name', sort => 'ASC', limit => 30]
+		 * @param string|null $groupBy e.IdPerson
 		 * @return array
 		 */
-		public function search(array $filter, array $paginationOrderingSort): array {
+		public function search(array $filter, array $paginationOrderingSort, ?string $groupBy = null): array {
 			$PaginationOrderingSort = new DoctrinePaginationOrderingSort($paginationOrderingSort);
 			$qb = $this->qb->select($this->selectAlias);
 			$qb->setFirstResult(((empty($PaginationOrderingSort->page) ? 1 : $PaginationOrderingSort->page) - 1) * $PaginationOrderingSort->limit);
