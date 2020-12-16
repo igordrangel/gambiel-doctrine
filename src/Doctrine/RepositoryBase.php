@@ -11,6 +11,7 @@
 	use Doctrine\ORM\QueryBuilder;
 	use Doctrine\ORM\TransactionRequiredException;
 	use GambiEl\Doctrine\Filter\DoctrineFilterBase;
+	use GambiEl\Doctrine\Filter\DoctrinePaginationOrderingSort;
 	use GambiEl\Doctrine\Join\JoinConfig;
 	use GambiEl\Helpers\GambielArrayHelper;
 	use InvalidArgumentException;
@@ -104,24 +105,21 @@
 		
 		/**
 		 * @param array $filter
-		 * @param string|null $orderBy
-		 * @param int|null $page
-		 * @param int|null $limit
-		 * @param string|null $typeReturn 'class | json'
-		 * @param string|null $groupBy
+		 * @param array $paginationOrderingSort Array with [page => 1, order => 'e.Name', sort => 'ASC', limit => 30]
 		 * @return array
 		 */
-		public function search(array $filter, ?string $orderBy = null, ?int $page = 1, ?int $limit = 0, ?string $typeReturn = "class", ?string $groupBy = null): array {
+		public function search(array $filter, array $paginationOrderingSort): array {
+			$PaginationOrderingSort = new DoctrinePaginationOrderingSort($paginationOrderingSort);
 			$qb = $this->qb->select($this->selectAlias);
-			$qb->setFirstResult(((empty($page) ? 1 : $page) - 1) * $limit);
+			$qb->setFirstResult(((empty($PaginationOrderingSort->page) ? 1 : $PaginationOrderingSort->page) - 1) * $PaginationOrderingSort->limit);
 			if (!empty($groupBy)) {
-				$qb->add('groupBy', [$groupBy]);
+				$qb->add('groupBy', [$PaginationOrderingSort->orderBy]);
 			}
-			if (!empty($orderBy)) {
-				$qb->add('orderBy', [$orderBy]);
+			if (!empty($PaginationOrderingSort->orderBy)) {
+				$qb->add('orderBy', [$PaginationOrderingSort->orderBy]);
 			}
-			if (!empty($limit)) {
-				$qb->setMaxResults($limit);
+			if (!empty($PaginationOrderingSort->limit)) {
+				$qb->setMaxResults($PaginationOrderingSort->limit);
 			}
 			DoctrineFilterBase::create(
 				$qb,
@@ -129,11 +127,7 @@
 				$this->getJoinsConfig()
 			);
 			$query = $qb->getQuery();
-			if ($typeReturn == 'class'):
-				return $query->getResult();
-			else:
-				return $query->getArrayResult();
-			endif;
+			return $query->getResult();
 		}
 		
 		/**
