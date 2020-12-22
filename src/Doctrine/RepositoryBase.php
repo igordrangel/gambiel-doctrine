@@ -17,6 +17,7 @@
 	use InvalidArgumentException;
 	
 	abstract class RepositoryBase {
+		private ?EntityManager $entityManager;
 		protected QueryBuilder $qb;
 		protected string $class;
 		protected string $dbConfigName;
@@ -44,14 +45,17 @@
 				
 				if ($indexConfig !== false) {
 					$config = $dbConfig[$indexConfig];
-					return $conn->getEntityManager(
-						$config['host'],
-						$config['dbName'],
-						$config['user'],
-						$config['password'],
-						$config['driver'],
-						$config['port']
-					);
+					if (empty($entityManager)) {
+						$this->entityManager = $conn->getEntityManager(
+							$config['host'],
+							$config['dbName'],
+							$config['user'],
+							$config['password'],
+							$config['driver'],
+							$config['port']
+						);
+					}
+					return $this->entityManager;
 				} else {
 					throw new InvalidArgumentException("Database config is not found!");
 				}
