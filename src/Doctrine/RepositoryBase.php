@@ -75,6 +75,7 @@
 			try {
 				$object = $this->getById($id);
 				$this->EntityManager()->remove($object);
+				$this->flush();
 				$this->commit();
 			} catch (ORMException $e) {
 				$this->rollBack();
