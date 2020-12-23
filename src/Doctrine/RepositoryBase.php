@@ -45,7 +45,7 @@
 				
 				if ($indexConfig !== false) {
 					$config = $dbConfig[$indexConfig];
-					if (empty($entityManager)) {
+					if (empty($this->entityManager)) {
 						$this->entityManager = $conn->getEntityManager(
 							$config['host'],
 							$config['dbName'],
