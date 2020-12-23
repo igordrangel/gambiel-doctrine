@@ -12,14 +12,14 @@
 			$columnOrder = $params['sort'] ?? '';
 			$orderType = $params['order'] ?? '';
 			
-			$this->page = (int)$params['page'] ?? 1;
-			$this->limit = (int)$params['limit'] ?? $limit;
+			$this->page = (isset($params['page']) ? (int)$params['page'] : 1);
+			$this->limit = (isset($params['limit']) ? (int)$params['limit'] : $limit);
 			
 			if ($sort) $this->orderBy = "{$sort} {$order}";
 			if (!empty($columnOrder)) {
 				$this->orderBy = "$columnOrder $orderType";
 			}
 			
-			$this->trash = (int)$params['trash'] ?? 0;
+			$this->trash = (isset($params['trash']) ? (int)$params['trash'] : 0);
 		}
 	}
