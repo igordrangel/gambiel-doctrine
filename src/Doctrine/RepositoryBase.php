@@ -71,10 +71,13 @@
 		}
 		
 		public function delete(int $id) {
+			$this->beginTransaction();
 			try {
 				$object = $this->getById($id);
 				$this->EntityManager()->remove($object);
+				$this->commit();
 			} catch (ORMException $e) {
+				$this->rollBack();
 				throw new InvalidArgumentException($e->getMessage(), $e->getCode());
 			}
 		}
@@ -159,8 +162,15 @@
 		}
 		
 		public function save($object) {
-			$this->persist($object);
-			$this->flush();
+			$this->beginTransaction();
+			try {
+				$this->persist($object);
+				$this->flush();
+				$this->commit();
+			} catch (InvalidArgumentException $e) {
+				$this->rollBack();
+				throw $e;
+			}
 		}
 		
 		public function persist($object) {
