@@ -17,7 +17,7 @@
 	use InvalidArgumentException;
 	
 	abstract class RepositoryBase {
-		private ?EntityManager $entityManager;
+		private static ?EntityManager $entityManager;
 		protected QueryBuilder $qb;
 		protected string $class;
 		protected string $dbConfigName;
@@ -35,8 +35,6 @@
 		}
 		
 		protected function EntityManager(): EntityManager {
-			$conn = new ConnectionConfig();
-			
 			$dbConfig = $_ENV['GAMBIEL_DB_CONFIG'];
 			if (is_array($dbConfig)) {
 				$indexConfig = GambielArrayHelper::multidimensionalSearch($dbConfig, [
@@ -44,18 +42,7 @@
 				]);
 				
 				if ($indexConfig !== false) {
-					$config = $dbConfig[$indexConfig];
-					if (empty($this->entityManager)) {
-						$this->entityManager = $conn->getEntityManager(
-							$config['host'],
-							$config['dbName'],
-							$config['user'],
-							$config['password'],
-							$config['driver'],
-							$config['port']
-						);
-					}
-					return $this->entityManager;
+					return GambiElEntityManager::getEntityManager($dbConfig[$indexConfig]);
 				} else {
 					throw new InvalidArgumentException("Database config is not found!");
 				}
