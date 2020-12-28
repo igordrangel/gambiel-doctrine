@@ -17,7 +17,6 @@
 	use InvalidArgumentException;
 	
 	abstract class RepositoryBase {
-		private static ?EntityManager $entityManager;
 		protected QueryBuilder $qb;
 		protected string $class;
 		protected string $dbConfigName;
