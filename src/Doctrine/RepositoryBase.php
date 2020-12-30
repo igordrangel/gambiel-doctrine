@@ -160,6 +160,22 @@
 			}
 		}
 		
+		public function saveAll(array $objects): array {
+			$this->beginTransaction();
+			try {
+				foreach ($objects as $object) {
+					$this->persist($object);
+				}
+				$this->flush();
+				$this->commit();
+				
+				return $objects;
+			} catch (InvalidArgumentException $e) {
+				$this->rollBack();
+				throw $e;
+			}
+		}
+		
 		public function persist($object) {
 			try {
 				$this->EntityManager()->persist($object);
