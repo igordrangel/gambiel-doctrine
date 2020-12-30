@@ -69,6 +69,23 @@
 			}
 		}
 		
+		public function deleteAll(array $objects) {
+			$this->beginTransaction();
+			try {
+				foreach ($objects as $object) {
+					$this->EntityManager()->remove($object);
+				}
+				$this->flush();
+				$this->commit();
+			} catch (ORMException $e) {
+				$this->rollBack();
+				throw new InvalidArgumentException($e->getMessage(), $e->getCode());
+			} catch (InvalidArgumentException $e) {
+				$this->rollBack();
+				throw $e;
+			}
+		}
+		
 		public function getById(int $id): ?object {
 			try {
 				return $this->EntityManager()->find($this->class, $id);
@@ -160,7 +177,7 @@
 			}
 		}
 		
-		public function saveAll(array $objects): array {
+		public function saveAll(array $objects) {
 			$this->beginTransaction();
 			try {
 				foreach ($objects as $object) {
@@ -168,8 +185,6 @@
 				}
 				$this->flush();
 				$this->commit();
-				
-				return $objects;
 			} catch (InvalidArgumentException $e) {
 				$this->rollBack();
 				throw $e;
